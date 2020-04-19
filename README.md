@@ -57,12 +57,13 @@ exit
 
 # [LAB-02](../../tree/LAB-02) - Build and run tomcat container
 Steps:
+* SSH into docker virtual box
+* Change into /vagrant directory
 * Look at [Dockerfile](./Dockerfile)
 * Build image using the Dockerfile
 * Run image detached
 * Check tomcat is service content
 * Stop container 
-
 
 ```
 # build image
@@ -79,6 +80,8 @@ docker stop <image id>
 ```
 ### e.g:
 ```
+vagrant ssh docker
+cd /vagrant
 docker image build -t ms-tomcat .
 docker container run -d -p 8080:8080 ms-tomcat
 curl localhost:8080
