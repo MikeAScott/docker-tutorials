@@ -7,7 +7,7 @@ For official docker information goto https://docs.docker.com/
 
 In particular the [Get Started Guide](https://docs.docker.com/get-started/) is really good.
 
-# [LAB-01](tree/LAB-01) - Set up docker in Virtualbox
+# [LAB-01](../tree/LAB-01) - Set up docker in Virtualbox
 ## Setup Docker
 * Install Virtualbox 
 * Install Vagrant
