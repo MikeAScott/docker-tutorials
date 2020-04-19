@@ -55,6 +55,37 @@ ls
 exit
 ```
 
+# [LAB-02](../../tree/LAB-02) - Build and run tomcat container
+Steps:
+* Look at [Dockerfile](./Dockerfile)
+* Build image using the Dockerfile
+* Run image detached
+* Check tomcat is service content
+* Stop container 
+
+
+```
+# build image
+docker image build -t <imagetag> .
+# run container detached mapping port 8080 to localhost
+docker container run -d -p 8080:8080 <imagetag>
+# check content is being served
+curl localhost:8080
+# Find running container id or name
+docker ps
+# You shold see a container with your image name running
+# stop container
+docker stop <image id>
+```
+### e.g:
+```
+docker image build -t ms-tomcat .
+docker container run -d -p 8080:8080 ms-tomcat
+curl localhost:8080
+docker ps
+docker stop 7b41c6ba2c36
+```
+
 ---
 Free to use under [MIT Licence](./LICENCE)
 
