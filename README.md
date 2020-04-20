@@ -62,7 +62,7 @@ Steps:
 * Look at [Dockerfile](./Dockerfile)
 * Build image using the Dockerfile
 * Run image detached
-* Check tomcat is service content
+* Check tomcat is serving content
 * Stop container 
 
 ```
@@ -87,6 +87,52 @@ docker container run -d -p 8080:8080 ms-tomcat
 curl localhost:8080
 docker ps
 docker stop 7b41c6ba2c36
+```
+
+# [LAB-03](../../tree/LAB-03) - Build and run mysql container with persistent volume
+Steps:
+* SSH into docker virtual box
+* Change into /vagrant directory
+* Look at [mysql/Dockerfile](mysql/Dockerfile)
+* Build image using the Dockerfile
+* Run image detached
+* Check tomcat is service content
+* Stop container 
+
+```
+# build images
+docker image build -t <imagetag> 
+# run container detached mapping port 8080 to localhost
+docker container run -d -p 8080:8080 <imagetag>
+# check content is being served
+curl localhost:8080
+# Find running container id or name
+docker ps
+# You shold see a container with your image name running
+# stop container
+docker stop <image id>
+```
+### e.g:
+```
+vagrant ssh docker
+cd /vagrant
+
+# build images
+docker image build -t ms-tomcat tomcat
+docker image build -t ms-mysql mysql
+
+# provision network, volume, and containers
+docker network create webstack
+docker volume create mysql-data
+docker container run -d -p 8080:8080 --network webstack --name web ms-tomcat
+docker container run -d --volume mysql-data:/var/lib/mysql --network webstack --name db ms-mysql
+
+# check its all running
+docker ps
+curl localhost:8080
+docker container stop web db
+docker volume rm mysql-data
+docker network rm webstack
 ```
 
 ---
