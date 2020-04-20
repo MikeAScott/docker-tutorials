@@ -90,11 +90,10 @@ docker stop 7b41c6ba2c36
 ```
 
 # [LAB-03](../../tree/LAB-03) - Build and run mysql container with persistent volume
-Steps:
-* SSH into docker virtual box
-* Change into /vagrant directory
 * Look at [mysql/Dockerfile](mysql/Dockerfile)
 * Look at [tomcat/Dockerfile](tomcat/Dockerfile)
+Steps:
+* SSH into docker virtual box
 * Build images using the Dockerfiles
 * Create network and volume
 * Run images detached
@@ -106,12 +105,14 @@ Steps:
 ### e.g:
 ```
 ROOT_PASSWORD=<secret>
+DB_PASSWORD=<secret>
 vagrant ssh docker
-cd /vagrant
 
 # build images
-docker image build -t ms-tomcat tomcat 
-docker image build -t ms-mysql mysql --build-arg db_root_password=$ROOT_PASSWORD
+docker image build -t ms-tomcat /vagrant/tomcat 
+docker image build -t ms-mysql /vagrant/mysql \ 
+    --build-arg db_root_password=$ROOT_PASSWORD \
+    --build-arg db_password=$DB_PASSWORD
 
 # provision network, volume, and containers
 docker network create webstack
@@ -125,8 +126,9 @@ curl localhost:8080
 
 docker exec -it db /bin/bash
 # mysql -uroot -p<>secret>
-# show databases;
-# exit
+# mysql> show databases;
+# you should see tododb in the list
+# mysql> exit
 # exit
 
 
