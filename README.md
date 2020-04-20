@@ -111,7 +111,7 @@ cd /vagrant
 
 # build images
 docker image build -t ms-tomcat tomcat 
-docker image build -t ms-mysql mysql --build-arg root_password=$ROOT_PASSWORD
+docker image build -t ms-mysql mysql --build-arg db_root_password=$ROOT_PASSWORD
 
 # provision network, volume, and containers
 docker network create webstack

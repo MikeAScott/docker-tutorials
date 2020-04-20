@@ -1,6 +1,7 @@
 FROM centos:7
 
-RUN yum install tomcat -y  && \
+RUN yum update -y && \
+    yum install tomcat -y && \
     yum clean all && \
     rm -rf /var/cache/yum
 

@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
     docker.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--memory", 1024]
     end
 
     docker.vm.provision "shell", inline: <<-SCRIPT
