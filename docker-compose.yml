@@ -1,0 +1,25 @@
+---
+version: '3'
+
+services:
+    web:
+        build: tomcat
+        image: ms/tomcat
+        ports: 
+            - 8080:8080
+        networks: 
+            - webstack
+
+    db:
+        build: mysql
+        image: ms/mysql
+        networks: 
+            - webstack
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+networks:
+    webstack:
+
+volumes: 
+    mysql-data: 

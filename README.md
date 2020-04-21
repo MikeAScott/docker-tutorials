@@ -139,6 +139,10 @@ docker volume rm mysql-data
 docker network rm webstack
 ```
 
+# [LAB-04](../../tree/LAB-04) - Build stack with docker compose
+
+
+
 ---
 Free to use under [MIT Licence](./LICENCE)
 
