@@ -12,8 +12,10 @@ ARG db_root_password
 ARG db_name=tododb
 ARG db_user=todo
 ARG db_password
+
 COPY secure_installation.sql secure_installation.sql
 COPY setup_db.sql setup_db.sql
+
 RUN eval "/usr/bin/mysqld_safe &" && \
     /usr/bin/mysql-systemd-start post && \
     mysql --user=root -e" \
