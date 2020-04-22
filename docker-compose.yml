@@ -5,21 +5,23 @@ services:
     web:
         build: tomcat
         image: ms/tomcat
-        ports: 
+        ports:
             - 8080:8080
-        networks: 
+        networks:
             - webstack
+        environment: 
+            - db_user
+            - db_password
+            - db_name   
 
     db:
         build: mysql
         image: ms/mysql
-        networks: 
+        networks:
             - webstack
-        volumes:
-            - mysql-data:/var/lib/mysql
-
+        environment: 
+            - db_user
+            - db_password
+            - db_name
 networks:
     webstack:
-
-volumes: 
-    mysql-data: 

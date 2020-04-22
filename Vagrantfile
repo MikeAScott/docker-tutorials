@@ -20,9 +20,13 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     docker.vm.provision "shell", inline: <<-SCRIPT
         apt-get update -y
         apt-get install docker docker.io -y
+        apt-get install docker-compose -y
         groupadd docker
         usermod -aG docker vagrant
         systemctl start docker
+        #su vagrant
+        #cd /vagrant
+        #docker-compose up -d
     SCRIPT
   end
 

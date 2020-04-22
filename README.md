@@ -139,9 +139,37 @@ docker volume rm mysql-data
 docker network rm webstack
 ```
 
-# [LAB-04](../../tree/LAB-04) - Build stack with docker compose
-
-
+# [LAB-04](../../tree/LAB-04) - Build a stack with docker compose
+## Setup Docker Compose
+* Have a look at the [`Vagrantfile`](Vagrantfile)
+    * The provisioner has changed to set up docker-compose in Centos/7
+        * `apt-get install docker-compose -y`
+* Run `vagrant up` (destroy previous docker vm)
+* SSH into the docker vm (`vagrant ssh docker`)
+* Look at [`docker-compose.yml`](docker-compose.yml)
+    * This defines the services networks and volumes to create
+    * It uses the Dockerfiles from [LAB-03](../LAB-03) to define 2 images
+    * These are configured with ports networks and variables as required
+    * A named network is also defined that the containers wil be run in
+* Edit the [`docker-compose.yml`](docker-compose.yml) file to chanage the image names as necessary
+    * And anything else you might want to change e.g. port mappings, betwork names
+* Change into the `/vagrant` directory 
+* Run `docker-compose build` to build the images
+* Run `docker image ls` to see your new images
+* Run `docker compose up -d` to run your containers in detached mode
+* Run `docker ps` you should see two running containers
+    * `vagrant_web_1`
+    * `vagrant_db_1`
+* Run `curl localhost:8080` to see the tomcat index page
+* Attach to the web continer with a bash shell an dping the db container
+    * `docker exec -it vagrant_web_1 /bin/bash`
+    * `ping db`
+* As a test install mysql client and connect to the database
+    * `yum install mysql -y`
+    * `mysql -h db -u todo`
+    * `show databases` you should see the tododb in the list
+* Try to connect to the application using a browser
+    * http://localhost:8080/todo
 
 ---
 Free to use under [MIT Licence](./LICENCE)
